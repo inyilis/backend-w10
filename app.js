@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const routes = require('./src/main');
 const db = require('./src/Configs/db');
-const redis = require('./src/Configs/redis');
+// const redis = require('./src/Configs/redis');
 const logger = require('./src/Helpers/logger');
 
 server.use(bodyParser.urlencoded({ extended: false }));
@@ -33,13 +33,13 @@ db.connect()
     logger.error('Database not Connected');
   });
 
-redis.redisCheck()
-  .then((res) => {
-    logger.info(res);
-  })
-  .catch((err) => {
-    logger.error(err);
-  });
+// redis.redisCheck()
+//   .then((res) => {
+//     logger.info(res);
+//   })
+//   .catch((err) => {
+//     logger.error(err);
+//   });
 
 server.listen(4000, () => {
   logger.info('Server running on port 4000');
