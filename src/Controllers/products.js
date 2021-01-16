@@ -2,16 +2,16 @@ const products = {};
 const model = require('../Models/products');
 const respon = require('../Helpers/respon');
 const cloudUpload = require('../Helpers/cloudUpload');
-// const { redisdb } = require('../Configs/redis');
+const { redisdb } = require('../Configs/redis');
 const logger = require('../Helpers/logger');
 
 products.get = async (req, res) => {
   try {
     const result = await model.get();
-    // const saveRedis = JSON.stringify(result);
+    const saveRedis = JSON.stringify(result);
     // eslint-disable-next-line no-console
     console.log('Data Dari PostgreSQL');
-    // redisdb.setex('products', 60, saveRedis);
+    redisdb.setex('products', 60, saveRedis);
     return respon(res, 200, result);
   } catch (error) {
     logger.error(error);
@@ -40,7 +40,7 @@ products.add = async (req, res) => {
     };
 
     const result = await model.addProduct(product);
-    // redisdb.del('products');
+    redisdb.del('products');
     return respon(res, 201, result);
   } catch (error) {
     logger.error(error);
@@ -50,7 +50,7 @@ products.add = async (req, res) => {
 
 products.update = async (req, res) => {
   try {
-    // redisdb.del('products');
+    redisdb.del('products');
     const product = {
       id: null,
       nama: null,
@@ -84,7 +84,7 @@ products.update = async (req, res) => {
 products.del = async (req, res) => {
   try {
     const result = await model.delProduct(req.params.id);
-    // redisdb.del('products');
+    redisdb.del('products');
     return respon(res, 200, result);
   } catch (error) {
     logger.error(error);
