@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm install
 
-VOLUME [ "/usr/backend" ]
+VOLUME /usr/backend
 
 EXPOSE 4000
 
