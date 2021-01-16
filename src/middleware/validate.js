@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const respon = require('../Helpers/respon');
 
+// eslint-disable-next-line consistent-return
 const checkToken = (role) => (req, res, next) => {
   const { authtoken } = req.headers;
   let isAcc = false;
@@ -13,6 +14,7 @@ const checkToken = (role) => (req, res, next) => {
     if (err) {
       return respon(res, 209, err);
     }
+    // eslint-disable-next-line array-callback-return
     role.map((value) => {
       if (value === decode.role) {
         isAcc = true;

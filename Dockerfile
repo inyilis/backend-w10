@@ -4,6 +4,8 @@ RUN mkdir -p /usr/backend
 
 WORKDIR /usr/backend
 
+VOLUME [ "/usr/backend" ]
+
 COPY package*.json ./
 
 COPY . .
